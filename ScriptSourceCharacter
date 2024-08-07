@@ -286,6 +286,173 @@ game.Debris:AddItem(projectile, 10)
 end)
 
 local tool = Instance.new("Tool")
+tool.Name = "Spike Road"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+ local currentTime = tick()
+            if currentTime - lastPressTime >= 4 then
+                lastPressTime = currentTime
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
+local playerForward = humanoidRootPart.CFrame.LookVector
+
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://111898867"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(2.5)
+    task.wait(0.45)
+
+local numUzumaki = 40
+local spacing = 6
+local travelDistance = 10
+
+local TweenService = game:GetService("TweenService")
+
+local function createSpikes()
+    for i = 1, numUzumaki do
+    sg = math.random(5, 15)
+        spike = Instance.new("Part")
+        spike.Name = "Spike"
+        spike.Size = Vector3.new(2.5, sg, 2.5)
+        spike.Color = Color3.fromRGB(0, 0, 0)
+        spike.Anchored = true
+        spike.CanCollide = true
+        spike.Material = Enum.Material.Concrete
+        spike.Parent = workspace
+        spike.Position = humanoidRootPart.Position + (i * spacing * playerForward) + Vector3.new(0, -travelDistance, 0)
+
+Spooky = Instance.new("Sound", spike)
+Spooky.Name = "Spike Wall"
+Spooky.SoundId = "rbxassetid://236382703"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+
+        spike.Touched:Connect(function(hit)
+            if hit.Parent ~= char then
+                local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+                if humanoid and humanoid.Health ~= 0 then
+                    local args = {
+        [1] = humanoid.RootPart.CFrame,
+        [2] = humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+                end
+            end
+        end)
+
+        local tweenInfo = TweenInfo.new(
+            0,
+            Enum.EasingStyle.Quad,
+            Enum.EasingDirection.Out,
+            0,
+            false,
+            0
+        )
+
+        local targetPosition = humanoidRootPart.Position + (i * spacing * playerForward)
+        local tween = TweenService:Create(spike, tweenInfo, {Position = targetPosition})
+        tween:Play()
+        tween.Completed:Wait()
+
+        game.Debris:AddItem(spike, 3)
+    end
+end
+
+createSpikes()
+  end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Otherworldly help"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 10 then
+                lastPressTime = currentTime 
+                local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://15615812483"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "OW_SoundStarter"
+Spooky.SoundId = "rbxassetid://6898045058"
+Spooky.Volume = 2
+Spooky.PlaybackSpeed = 1.5
+Spooky.Looped = false
+Spooky:Play()
+  wait(0.4)
+  k:AdjustSpeed(0)
+  wait(1.5)
+local assetId = tonumber(14900383642)
+  if not assetId then
+   warn("Invalid asset ID")
+   return
+  end
+local user = game.Players.LocalPlayer
+ 
+  local model = game:GetObjects("rbxassetid://" .. assetId)[1]
+model.Parent = workspace
+model.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(16.5,0,0)
+Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "OW_Spawn"
+Spooky.SoundId = "rbxassetid://7616326115"
+Spooky.Volume = 3
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+game.Debris:AddItem(model, 7)
+task.wait(3)
+  local closestDistance = math.huge
+                    local closestHumanoid = nil
+                    local Usuario = game.Players.LocalPlayer
+
+                    for _, v in pairs(workspace:GetDescendants()) do
+                        if v:IsA("Humanoid") and v.RootPart and v.RootPart.Parent ~= Usuario.Character then
+                            local distance =
+                                (v.RootPart.Position - Usuario.Character.HumanoidRootPart.Position).magnitude
+                            if distance < closestDistance and distance <= 100 then
+                                closestDistance = distance
+                                closestHumanoid = v
+                            end
+                        end
+                    end
+
+                    if closestHumanoid and closestHumanoid.Health ~= 0 then
+                for i = 1, 5 do
+                 wait(0.4)
+                       local args = {
+           [1] = closestHumanoid.RootPart.CFrame,
+           [2] = closestHumanoid.MaxHealth
+       }
+
+ game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+ end
+                    end
+  task.wait(1)
+k:Stop()
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
 tool.Name = "Reverse Black Hole"
 tool.RequiresHandle = false
 
