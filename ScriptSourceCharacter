@@ -1,0 +1,467 @@
+local tool = Instance.new("Tool")
+tool.Name = "Shadow Rush"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 1 then
+                lastPressTime = currentTime 
+                game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Vanish"):FireServer()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 300
+ wait()
+for i = 1, 5 do
+game:GetService("ReplicatedStorage").Remotes.KickSlam:FireServer()
+end
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Sequential Combo"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 2 then
+                lastPressTime = currentTime 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 200
+                for i = 1, 5 do
+game:GetService("ReplicatedStorage").Remotes.Punches:FireServer()
+             end
+                end
+ end)
+ 
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Upper Stomp"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 2 then
+                lastPressTime = currentTime 
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 150, 0)
+ wait(0.6)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 250 + Vector3.new(0, -250, 25)
+ wait()
+ for i = 1, 5 do
+ game:GetService("ReplicatedStorage").Remotes.KickSlam:FireServer()
+ end
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Massive Beating"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 2 then
+                lastPressTime = currentTime 
+                game:GetService("ReplicatedStorage").Remotes.Punches:FireServer()
+  wait(0.4)
+ game:GetService("ReplicatedStorage"):FindFirstChild("AfterImageEvent"):FireServer()
+for i = 1, 3 do 
+game:GetService("ReplicatedStorage").Remotes.Punches:FireServer()
+end
+   wait(0.6)
+for i = 1, 3 do 
+game:GetService("ReplicatedStorage").Remotes.Punches:FireServer()
+end
+ game:GetService("ReplicatedStorage"):FindFirstChild("AfterImageEvent"):FireServer()
+ wait(0.7)
+for i = 1, 3 do
+game:GetService("ReplicatedStorage").Remotes.Punches:FireServer()
+end
+ game:GetService("ReplicatedStorage"):FindFirstChild("AfterImageEvent"):FireServer()
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Consecutive Strikes"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 3 then
+                lastPressTime = currentTime 
+                local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://14750230714"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(2)
+for i = 1, 6 do
+  wait(0.1)
+game:GetService("ReplicatedStorage"):WaitForChild("barrage"):WaitForChild("jetbarrage"):FireServer()
+end
+  wait(1.6)
+ k:Stop()
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Speed Boost"
+tool.RequiresHandle = false
+tool.ToolTip = "Press again to turn off high speed"
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local player = game.Players.LocalPlayer
+local originalSpeed = player.Character.Humanoid.WalkSpeed
+
+local function increaseSpeed()
+    player.Character.Humanoid.WalkSpeed = originalSpeed * 8
+end
+
+local function resetSpeed()
+    player.Character.Humanoid.WalkSpeed = originalSpeed
+end
+
+tool.Activated:Connect(function()
+    if player.Character.Humanoid.WalkSpeed == originalSpeed then
+        increaseSpeed()
+    else
+        resetSpeed()
+    end
+end)
+
+local function aura()
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character
+local humanoid = character:WaitForChild("Humanoid")
+local runService = game:GetService("RunService")
+
+local auraPart = Instance.new("Part")
+auraPart.Name = "Aura"
+auraPart.Size = Vector3.new(1, 1, 1)
+auraPart.Transparency = 1
+auraPart.Anchored = true
+auraPart.CanCollide = false
+auraPart.Parent = character.Torso
+
+local fire = Instance.new("Fire")
+fire.Name = "Fire"
+fire.Size = 3
+fire.Color = Color3.fromRGB(0, 0, 0)
+fire.Parent = auraPart
+
+local radius = 5
+local speed = 3
+local angle = 0
+
+local function updateAuraPosition()
+    angle = angle + speed * runService.Heartbeat:Wait()
+    local x = math.sin(angle) * radius
+    local z = math.cos(angle) * radius
+    auraPart.CFrame = character.Torso.CFrame * CFrame.new(x, 0, z)
+end
+
+runService.RenderStepped:Connect(updateAuraPosition)
+end
+
+local function act1()
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://17507532908"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+wait(0.9)
+ k:AdjustSpeed(0)
+local ohString1 = "Kenjaku"
+game:GetService("ReplicatedStorage").Picked:FireServer(ohString1)
+wait(2)
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hu = char.Humanoid
+local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
+local playerForward = humanoidRootPart.CFrame
+
+for i = 1, 20 do
+local tochk = humanoidRootPart.CFrame + Vector3.new(math.random(-100, 100), math.random(-5, 5), math.random(-100,100))
+local RTy = math.random(5, 40)
+    local args = {
+        [1] = tochk,
+        [2] = math.huge
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+end
+  wait(1)
+local player = game.Players.LocalPlayer
+local humanoid = player.Character.Humanoid
+local activeTracks = humanoid:GetPlayingAnimationTracks()
+
+for _, track in pairs(activeTracks) do
+    track:Stop()
+end
+coroutine.wrap(aura)()
+  wait(0.5)
+  game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+ local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+end
+
+local function tools()
+local tool = Instance.new("Tool")
+tool.Name = "Plasma"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 3 then
+                lastPressTime = currentTime 
+                for i = 1, 4 do
+game:GetService("ReplicatedStorage").GojoV3.maxred:FireServer()
+end
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool", game.Players.LocalPlayer.Backpack)
+tool.Name = "Black spike"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+local currentTime = tick()
+            if currentTime - lastPressTime >= 0.5 then
+                lastPressTime = currentTime
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://186934753"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1.5)
+
+game.Debris:AddItem(projectile, 10)
+
+    shootDirection = character.PrimaryPart.CFrame.LookVector
+    projectile = Instance.new("Part")
+    projectile.Name = "BlackShip"
+    projectile.Size = Vector3.new(2.5, 2.5, 7)
+    projectile.Color = Color3.fromRGB(0, 0, 0)
+    projectile.Anchored = false
+    projectile.CanCollide = true
+    projectile.Material = Enum.Material.Concrete
+    projectile.Shape = Enum.PartType.Wedge
+    projectile.Parent = workspace
+
+    projectile.CFrame = character.PrimaryPart.CFrame * CFrame.new(0, 0, -5)
+    projectile.Velocity = shootDirection * 300
+
+    local function onTouch(hit)
+        if hit.Parent:FindFirstChild("Humanoid") and hit.Parent ~= game.Players.LocalPlayer.Character then
+          if hit.Parent.Humanoid.Health ~= 0 then
+            local args = {
+        [1] = hit.Parent.Humanoid.RootPart.CFrame,
+        [2] = hit.Parent.Humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+     end
+        end
+    end
+
+    projectile.Touched:Connect(onTouch)
+   end
+end)
+
+local tool = Instance.new("Tool")
+tool.Name = "Reverse Black Hole"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+local currentTime = tick()
+            if currentTime - lastPressTime >= 6 then
+                lastPressTime = currentTime
+                local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+local player = game.Players.LocalPlayer
+
+local function launchNeonPart()
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://17507532908"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(0.9)
+  wait(0.9)
+ k:AdjustSpeed(0)
+  wait(2.5)
+  k:AdjustSpeed(2)
+   wait(0.7)
+   k:AdjustSpeed(0)
+    neonPart = Instance.new("Part")
+    neonPart.Name = "NeonPart"
+    neonPart.Size = Vector3.new(60, 60, 60)
+    neonPart.Shape = Enum.PartType.Ball
+    neonPart.Color = Color3.fromRGB(25, 25, 25)
+    neonPart.Transparency = 0
+    neonPart.Material = Enum.Material.Neon
+    neonPart.CanCollide = false
+    neonPart.Parent = workspace
+    neonPart.CFrame = player.Character.HumanoidRootPart.CFrame
+    
+    Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "Hollow Hole"
+Spooky.SoundId = "rbxassetid://1146691360"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+game.Debris:AddItem(neonPart, 20)
+
+    partTween = game:GetService("TweenService"):Create(neonPart, TweenInfo.new(10, Enum.EasingStyle.Linear), {
+        Position = neonPart.Position + player.Character.HumanoidRootPart.CFrame.LookVector * 2500
+    })
+    partTween:Play()
+ neonPart.Touched:Connect(function(hit)
+        if hit.Parent:FindFirstChildOfClass("Humanoid") then
+            humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+            if humanoid.Parent ~= player.Character and humanoid.Health ~= 0 then
+local args = {
+        [1] = hit.Parent.Humanoid.RootPart.CFrame,
+        [2] = hit.Parent.Humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+            end
+        end
+    end)
+    wait(1.5)
+    k:Stop()
+    local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+end
+
+    launchNeonPart()
+    end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Domain Expansion"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 40 then
+                lastPressTime = currentTime 
+                local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://18190670658"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "Astaroth Domain Expansion"
+Spooky.SoundId = "rbxassetid://17558107142"
+Spooky.Volume = 3.5
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky.TimePosition = 1.5
+Spooky:Play()
+  wait(3)
+ local function spawnUzumakiCircle(hit)
+  centerPosition = hit.Parent.Humanoid.RootPart.CFrame
+  local radius = 30
+  local numUzumaki = 8
+
+  for i = 1, numUzumaki do
+    local angle = (i - 1) * 2 * math.pi / numUzumaki
+    local x = centerPosition.X + radius * math.cos(angle)
+    local y = centerPosition.Y
+    local z = centerPosition.Z + radius * math.sin(angle)
+
+    local args = {
+        [1] = CFrame.new(x, y, z),
+        [2] = hit.Parent.Humanoid.MaxHealth
+    }
+
+    game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+  end
+end
+
+local function createBlock(position)
+  local block = Instance.new("Part")
+  block.Parent = workspace
+  block.Size = Vector3.new(13, 13, 13)
+  block.Position = position
+  block.Transparency = 1
+  block.BrickColor = BrickColor.new("Black")
+  block.Color = Color3.new(0, 0, 0)
+  block.Material = Enum.Material.Neon
+  block.Anchored = true
+
+  game.Debris:AddItem(block, 30)
+
+  local fire = Instance.new("Fire")
+  fire.Heat = 10
+  fire.Color = block.Color
+  fire.SecondaryColor = block.Color
+  fire.Size = 100
+  fire.Parent = block
+
+  block.Touched:Connect(function(hit)
+    if hit.Parent:FindFirstChild("Humanoid") and hit.Parent ~= game.Players.LocalPlayer.Character then
+      if hit.Parent.Humanoid.Health ~= 0 then
+      spawnUzumakiCircle(hit) 
+    end
+     end
+  end)
+end
+
+local radius = 100
+
+for i = 1, 32 do
+  local angle = math.rad(i * (360 / 32))
+  local x = radius * math.cos(angle)
+  local z = radius * math.sin(angle)
+  local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(x, 0, z)
+  createBlock(position)
+end
+  wait(5)
+k:Stop()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+end
+
+local tool = Instance.new("Tool")
+tool.Name = "Astaroth"
+tool.RequiresHandle = false
+
+tool.Activated:Connect(function()
+ tool:Destroy()
+ coroutine.wrap(act1)()
+ game.Players:Chat("/e heal")
+ coroutine.wrap(tools)()
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
