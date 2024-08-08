@@ -255,17 +255,96 @@ end
 
 local function tools()
 local tool = Instance.new("Tool")
-tool.Name = "Plasma"
+tool.Name = "Energy Brust"
 tool.RequiresHandle = false
 
 local lastPressTime = 0
 tool.Activated:Connect(function()
   local currentTime = tick()
-            if currentTime - lastPressTime >= 3 then
-                lastPressTime = currentTime 
-                for i = 1, 4 do
-game:GetService("ReplicatedStorage").GojoV3.maxred:FireServer()
-end
+            if currentTime - lastPressTime >= 0.8 then
+                lastPressTime = currentTime
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://16419185188"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+  wait(0.1)
+ Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "Energy Brust Spawn"
+Spooky.SoundId = "rbxassetid://7211875874"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+                neonPart = Instance.new("Part")
+    neonPart.Name = "NeonPart"
+    neonPart.Size = Vector3.new(4, 4, 4)
+    neonPart.Shape = Enum.PartType.Ball
+    neonPart.Color = Color3.fromRGB(25, 25, 25)
+    neonPart.Transparency = 0
+    neonPart.Material = Enum.Material.Neon
+    neonPart.CanCollide = false
+    neonPart.Parent = workspace
+    neonPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    neonPart.CFrame = neonPart.CFrame * CFrame.Angles(math.rad(90), 0, 0)
+    
+    fire = Instance.new("Fire")
+    fire.Color = neonPart.Color
+    fire.SecondaryColor = neonPart.Color
+    fire.Size = 99
+    fire.Heat = 40
+    fire.Parent = neonPart
+    
+    local smoke = Instance.new("Smoke")
+		smoke.Color = Color3.new(0, 0, 0)
+		smoke.Opacity = 0.6
+		smoke.RiseVelocity = 99
+		smoke.Size = 20
+		smoke.Parent = neonPart
+    
+    Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "Energy Brust"
+Spooky.SoundId = "rbxassetid://1146691360"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+game.Debris:AddItem(neonPart, 20)
+
+    partTween = game:GetService("TweenService"):Create(neonPart, TweenInfo.new(10, Enum.EasingStyle.Linear), {
+        Position = neonPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 6000
+    })
+    partTween:Play()
+ neonPart.Touched:Connect(function(hit)
+        if hit.Parent:FindFirstChildOfClass("Humanoid") then
+            humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+            if humanoid.Parent ~= game.Players.LocalPlayer.Character and humanoid.Health ~= 0 then
+            neonPart:Destroy()
+         local explosion = Instance.new("Explosion")
+explosion.BlastRadius = 0
+explosion.Position = humanoid.RootPart.Position
+explosion.Parent = workspace
+local args = {
+        [1] = hit.Parent.Humanoid.RootPart.CFrame,
+        [2] = hit.Parent.Humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+    Spooky = Instance.new("Sound", explosion)
+Spooky.Name = "Energy Brust Touch"
+Spooky.SoundId = "rbxassetid://7211876150"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+            end
+            elseif hit.Parent:FindFirstChildOfClass("BasePart") then
+          local basepar = hit.Parent:FindFirstChildOfClass("BasePart")
+            local explosion = Instance.new("Explosion")
+            explosion.BlastRadius = 0
+            explosion.Position = basepar.Position
+            explosion.Parent = workspace
+        end
+    end)
             end
 end)
 
@@ -571,6 +650,21 @@ local user = game.Players.LocalPlayer
 neonPart.Size = Vector3.new(25,25,25)
 neonPart.Position = game.Workspace[user.Name].Torso.Position + Vector3.new(0, 0, 0)
 neonPart.Parent = workspace
+neonPart.CFrame = neonPart.CFrame * CFrame.Angles(math.rad(90), 0, 0)
+    
+    fire = Instance.new("Fire")
+    fire.Color = neonPart.Color
+    fire.SecondaryColor = neonPart.Color
+    fire.Size = 99
+    fire.Heat = 40
+    fire.Parent = neonPart
+    
+    local smoke = Instance.new("Smoke")
+		smoke.Color = Color3.new(0, 0, 0)
+		smoke.Opacity = 0.6
+		smoke.RiseVelocity = 99
+		smoke.Size = 20
+		smoke.Parent = neonPart
     
     Spooky = Instance.new("Sound", neonPart)
 Spooky.Name = "Hollow Hole"
