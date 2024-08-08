@@ -810,38 +810,9 @@ tool.Activated:Connect(function()
   local currentTime = tick()
             if currentTime - lastPressTime >= 50 then
                 lastPressTime = currentTime 
-                local player = game.Players.LocalPlayer
-
-local hasTool = false
-for _, tool in ipairs(player.Backpack:GetChildren()) do
-    if tool.Name == "Pure Love" then
-        hasTool = true
-        break
-    end
-end
-
-if not hasTool then
-  local LP = game.Players.LocalPlayer
-repeat wait() until LP.Character
-for i,v in pairs(LP.Backpack:GetChildren()) do
-   if v.Name == "Wound Bursttrough" or v.Name == "Mini Uzumaki" then
-       v.Parent = LP.Character
-   end
-end
-  wait(1)
-local args = {"Yuta Okkotsu"}
-         game:GetService("ReplicatedStorage").Picked:FireServer(unpack(args))
-       wait(0.9)
-     for i = 1, 5 do
-game:GetService("Players").LocalPlayer.Backpack["Pure Love"].LocalScript.Event:FireServer()
-end
-end
-
-if hasTool then
-for i = 1, 5 do
-game:GetService("Players").LocalPlayer.Backpack["Pure Love"].LocalScript.Event:FireServer()
-end
-end
+                for i = 1, 5 do
+game:GetService("ReplicatedStorage").Yuta.love:FireServer()
+                end
             end
 end)
 
