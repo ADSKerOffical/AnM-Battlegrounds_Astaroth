@@ -183,6 +183,31 @@ end)
 
 tool.Parent = game.Players.LocalPlayer.Backpack
 
+local tool = Instance.new("Tool")
+tool.Name = "Earthquake"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 4.5 then
+            for i = 1, 2 do
+            coroutine.wrap(function()
+                lastPressTime = currentTime 
+                local ohTable1 = {
+                ["Function"] = "Fire",
+                ["Name"] = "OmniDirectionalPunch",
+                ["rootpos"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            }
+
+            game:GetService("ReplicatedStorage").Server:InvokeServer(ohTable1)
+            end)()
+            end
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
 local function aura()
 local assetId = tonumber(3850926240)
   if not assetId then
@@ -320,6 +345,184 @@ game.Debris:AddItem(neonPart, 20)
             humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
             if humanoid.Parent ~= game.Players.LocalPlayer.Character and humanoid.Health ~= 0 then
             neonPart:Destroy()
+         local explosion = Instance.new("Explosion")
+explosion.BlastRadius = 0
+explosion.Position = humanoid.RootPart.Position
+explosion.Parent = workspace
+local args = {
+        [1] = hit.Parent.Humanoid.RootPart.CFrame,
+        [2] = hit.Parent.Humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+    Spooky = Instance.new("Sound", explosion)
+Spooky.Name = "Energy Brust Touch"
+Spooky.SoundId = "rbxassetid://7211876150"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+            end
+            elseif hit.Parent:FindFirstChildOfClass("BasePart") then
+          local basepar = hit.Parent:FindFirstChildOfClass("BasePart")
+            local explosion = Instance.new("Explosion")
+            explosion.BlastRadius = 0
+            explosion.Position = basepar.Position
+            explosion.Parent = workspace
+        end
+    end)
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Energy Hail" 
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 3 then
+                lastPressTime = currentTime
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://14805978408"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1.5)
+  wait(0.3)
+  for i = 1, 20 do
+   wait(0.05)
+ Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "Energy Brust Spawn"
+Spooky.SoundId = "rbxassetid://7211875874"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+ x = math.random(-10, 10)
+ y = math.random(-4, 4)
+ z = 1
+ rnsi = 4
+                neonPart = Instance.new("Part")
+    neonPart.Name = "NeonPart"
+    neonPart.Size = Vector3.new(rnsi, rnsi, rnsi)
+    neonPart.Shape = Enum.PartType.Ball
+    neonPart.Color = Color3.fromRGB(25, 25, 25)
+    neonPart.Transparency = 0
+    neonPart.Material = Enum.Material.Neon
+    neonPart.CanCollide = false
+    neonPart.Parent = workspace
+    neonPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(x, y, z)
+    neonPart.CFrame = neonPart.CFrame * CFrame.Angles(math.rad(90), 0, 0)
+    
+    fire = Instance.new("Fire")
+    fire.Color = neonPart.Color
+    fire.SecondaryColor = neonPart.Color
+    fire.Size = math.random(20, 80)
+    fire.Heat = math.random(20, 60)
+    fire.Parent = neonPart
+    
+    local smoke = Instance.new("Smoke")
+		smoke.Color = Color3.new(0, 0, 0)
+		smoke.Opacity = 0.2
+		smoke.RiseVelocity = 99
+		smoke.Size = 20
+		smoke.Parent = neonPart
+    
+    Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "Energy Brust"
+Spooky.SoundId = "rbxassetid://1146691360"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+game.Debris:AddItem(neonPart, 20)
+
+    partTween = game:GetService("TweenService"):Create(neonPart, TweenInfo.new(10, Enum.EasingStyle.Linear), {
+        Position = neonPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * math.random(2000, 6000)
+    })
+    partTween:Play()
+ neonPart.Touched:Connect(function(hit)
+        if hit.Parent:FindFirstChildOfClass("Humanoid") then
+            humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+            if humanoid.Parent ~= game.Players.LocalPlayer.Character and humanoid.Health ~= 0 then
+            neonPart:Destroy()
+         local explosion = Instance.new("Explosion")
+explosion.BlastRadius = 0
+explosion.Position = humanoid.RootPart.Position
+explosion.Parent = workspace
+local args = {
+        [1] = hit.Parent.Humanoid.RootPart.CFrame,
+        [2] = hit.Parent.Humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+    Spooky = Instance.new("Sound", explosion)
+Spooky.Name = "Energy Brust Touch"
+Spooky.SoundId = "rbxassetid://7211876150"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+            end
+        end
+    end)
+  end
+  local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://15459529120"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+   wait(0.85)
+   Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "Energy Brust Spawn"
+Spooky.SoundId = "rbxassetid://7211875874"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+                neonPart = Instance.new("Part")
+    neonPart.Name = "NeonPart"
+    neonPart.Size = Vector3.new(20, 20, 20)
+    neonPart.Shape = Enum.PartType.Ball
+    neonPart.Color = Color3.fromRGB(25, 25, 25)
+    neonPart.Transparency = 0
+    neonPart.Material = Enum.Material.Neon
+    neonPart.CanCollide = false
+    neonPart.Parent = workspace
+    neonPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    neonPart.CFrame = neonPart.CFrame * CFrame.Angles(math.rad(90), 0, 0)
+    
+    fire = Instance.new("Fire")
+    fire.Color = neonPart.Color
+    fire.SecondaryColor = neonPart.Color
+    fire.Size = 99
+    fire.Heat = 40
+    fire.Parent = neonPart
+    
+    local smoke = Instance.new("Smoke")
+		smoke.Color = Color3.new(0, 0, 0)
+		smoke.Opacity = 0.85
+		smoke.RiseVelocity = 99
+		smoke.Size = 30
+		smoke.Parent = neonPart
+    
+    Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "Energy Brust"
+Spooky.SoundId = "rbxassetid://1146691360"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+game.Debris:AddItem(neonPart, 20)
+
+    partTween = game:GetService("TweenService"):Create(neonPart, TweenInfo.new(10, Enum.EasingStyle.Linear), {
+        Position = neonPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * 7500
+    })
+    partTween:Play()
+ neonPart.Touched:Connect(function(hit)
+        if hit.Parent:FindFirstChildOfClass("Humanoid") then
+            humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+            if humanoid.Parent ~= game.Players.LocalPlayer.Character and humanoid.Health ~= 0 then
          local explosion = Instance.new("Explosion")
 explosion.BlastRadius = 0
 explosion.Position = humanoid.RootPart.Position
