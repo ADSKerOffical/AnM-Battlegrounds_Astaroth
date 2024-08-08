@@ -137,6 +137,52 @@ tool.Activated:Connect(function()
     end
 end)
 
+local tool = Instance.new("Tool")
+tool.Name = "Scratches"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 4 then
+                lastPressTime = currentTime 
+                local player = game.Players.LocalPlayer
+
+local hasTool = false
+for _, tool in ipairs(player.Backpack:GetChildren()) do
+    if tool.Name == "Wound Sign" then
+        hasTool = true
+        break
+    end
+end
+
+if not hasTool then
+  local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "Pure Love" or v.Name == "Mini Uzumaki" then
+       v.Parent = LP.Character
+   end
+end
+  wait(1)
+local args = {"Sakuya Izayoi"}
+         game:GetService("ReplicatedStorage").Picked:FireServer(unpack(args))
+       wait(0.9)
+     for i = 1, 30 do
+game:GetService("Players").LocalPlayer.Backpack["Wound Sign"].Script.Event:FireServer()
+end
+end
+
+if hasTool then
+for i = 1, 30 do
+game:GetService("Players").LocalPlayer.Backpack["Wound Sign"].Script.Event:FireServer()
+end
+end
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
 local function aura()
 local assetId = tonumber(3850926240)
   if not assetId then
@@ -438,6 +484,52 @@ k:Stop()
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
 game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Great Attractor"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 50 then
+                lastPressTime = currentTime 
+                local player = game.Players.LocalPlayer
+
+local hasTool = false
+for _, tool in ipairs(player.Backpack:GetChildren()) do
+    if tool.Name == "Pure Love" then
+        hasTool = true
+        break
+    end
+end
+
+if not hasTool then
+  local LP = game.Players.LocalPlayer
+repeat wait() until LP.Character
+for i,v in pairs(LP.Backpack:GetChildren()) do
+   if v.Name == "Wound Bursttrough" or v.Name == "Mini Uzumaki" then
+       v.Parent = LP.Character
+   end
+end
+  wait(1)
+local args = {"Yuta Okkotsu"}
+         game:GetService("ReplicatedStorage").Picked:FireServer(unpack(args))
+       wait(0.9)
+     for i = 1, 5 do
+game:GetService("Players").LocalPlayer.Backpack["Pure Love"].LocalScript.Event:FireServer()
+end
+end
+
+if hasTool then
+for i = 1, 5 do
+game:GetService("Players").LocalPlayer.Backpack["Pure Love"].LocalScript.Event:FireServer()
+end
+end
             end
 end)
 
