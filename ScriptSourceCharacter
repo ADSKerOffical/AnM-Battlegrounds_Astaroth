@@ -280,6 +280,36 @@ end
 
 local function tools()
 local tool = Instance.new("Tool")
+tool.Name = "Throwing Darkness"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 1.5 then
+                lastPressTime = currentTime 
+local player = game:GetService("Players").LocalPlayer
+local mouse = player:GetMouse()
+        local targetCFrame = CFrame.new(mouse.Hit.Position)
+                local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://17866029050"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+  task.wait(0.35)
+
+        local args = {
+            [1] = targetCFrame,
+            [2] = math.huge
+        }
+
+        player.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
 tool.Name = "Energy Brust"
 tool.RequiresHandle = false
 
