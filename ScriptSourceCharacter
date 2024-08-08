@@ -138,35 +138,26 @@ tool.Activated:Connect(function()
 end)
 
 local function aura()
-local Players = game:GetService("Players")
-local localPlayer = Players.LocalPlayer
-local character = localPlayer.Character
-local humanoid = character:WaitForChild("Humanoid")
+local assetId = tonumber(3850926240)
+  if not assetId then
+   warn("Invalid asset ID")
+   return
+  end
+local user = game.Players.LocalPlayer
 local runService = game:GetService("RunService")
-
-local auraPart = Instance.new("Part")
-auraPart.Name = "Aura"
-auraPart.Size = Vector3.new(1, 1, 1)
-auraPart.Transparency = 1
-auraPart.Anchored = true
-auraPart.CanCollide = false
-auraPart.Parent = character.Torso
-
-local fire = Instance.new("Fire")
-fire.Name = "Fire"
-fire.Size = 3
-fire.Color = Color3.fromRGB(0, 0, 0)
-fire.Parent = auraPart
-
-local radius = 5
-local speed = 3
-local angle = 0
+ 
+  local model = game:GetObjects("rbxassetid://" .. assetId)[1]
+model.Parent = workspace
+model.CanTouch = false
+model.CanCollide = false
+model.Size = Vector3.new(5,5,5)
+model.Position = Game.Workspace[user.Name].Torso.Position + Vector3.new(0, 0, 0)
 
 local function updateAuraPosition()
-    angle = angle + speed * runService.Heartbeat:Wait()
-    local x = math.sin(angle) * radius
-    local z = math.cos(angle) * radius
-    auraPart.CFrame = character.Torso.CFrame * CFrame.new(x, 0, z)
+model.Position = game.Workspace[user.Name].Torso.Position + Vector3.new(0, 0, 0)
+if user.Character.Humanoid.Health <= 0 then
+model:Destroy()
+end
 end
 
 runService.RenderStepped:Connect(updateAuraPosition)
@@ -477,16 +468,17 @@ k:AdjustSpeed(0.9)
   k:AdjustSpeed(2)
    wait(0.7)
    k:AdjustSpeed(0)
-    neonPart = Instance.new("Part")
-    neonPart.Name = "NeonPart"
-    neonPart.Size = Vector3.new(60, 60, 60)
-    neonPart.Shape = Enum.PartType.Ball
-    neonPart.Color = Color3.fromRGB(25, 25, 25)
-    neonPart.Transparency = 0
-    neonPart.Material = Enum.Material.Neon
-    neonPart.CanCollide = false
-    neonPart.Parent = workspace
-    neonPart.CFrame = player.Character.HumanoidRootPart.CFrame
+    local assetId = tonumber(2248255537)
+ if not assetId then
+   warn("Invalid asset ID")
+   return
+  end
+local user = game.Players.LocalPlayer
+ 
+  local neonPart = game:GetObjects("rbxassetid://" .. assetId)[1]
+neonPart.Size = Vector3.new(25,25,25)
+neonPart.Position = game.Workspace[user.Name].Torso.Position + Vector3.new(0, 0, 0)
+neonPart.Parent = workspace
     
     Spooky = Instance.new("Sound", neonPart)
 Spooky.Name = "Hollow Hole"
@@ -498,7 +490,7 @@ Spooky:Play()
 game.Debris:AddItem(neonPart, 20)
 
     partTween = game:GetService("TweenService"):Create(neonPart, TweenInfo.new(10, Enum.EasingStyle.Linear), {
-        Position = neonPart.Position + player.Character.HumanoidRootPart.CFrame.LookVector * 2500
+        Position = neonPart.Position + player.Character.HumanoidRootPart.CFrame.LookVector * 3500
     })
     partTween:Play()
  neonPart.Touched:Connect(function(hit)
@@ -576,7 +568,7 @@ local function createBlock(position)
   block.Parent = workspace
   block.Size = Vector3.new(13, 13, 13)
   block.Position = position
-  block.Transparency = 1
+  block.Transparency = 0.95
   block.BrickColor = BrickColor.new("Black")
   block.Color = Color3.new(0, 0, 0)
   block.Material = Enum.Material.Neon
