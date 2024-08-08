@@ -138,6 +138,135 @@ tool.Activated:Connect(function()
 end)
 
 local tool = Instance.new("Tool")
+tool.Name = "Fly"
+tool.RequiresHandle = false
+tool.ToolTip = "To turn on the flight, put on the instrument and vice versa\n for advice use shiftlock"
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local players = game:GetService("Players")
+local userInputService = game:GetService("UserInputService")
+
+local flying = false
+local flySpeed = 75
+local player
+local humanoid
+local bodyVelocity
+local camera = game.Workspace.CurrentCamera
+
+local function enableFlying()
+	if not player or not player.Character then return end
+	flying = true
+
+	local bodyVelocity = Instance.new("BodyVelocity")
+	bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+	bodyVelocity.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+	bodyVelocity.P = 10000
+	bodyVelocity.Parent = player.Character.HumanoidRootPart
+
+	while flying do
+		local direction = camera.CFrame.LookVector
+		bodyVelocity.Velocity = direction * flySpeed
+		game:GetService("RunService").Heartbeat:Wait()
+	end
+
+
+	if bodyVelocity then
+		bodyVelocity:Destroy()
+	end
+end
+
+local function disableFlying()
+	flying = false
+end
+
+tool.Equipped:Connect(function()
+	player = game.Players.LocalPlayer
+	if player then
+		enableFlying()
+	end
+end)
+
+tool.Unequipped:Connect(function()
+	disableFlying()
+end)
+
+mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "Teleport"
+
+local lastPressTime = 0
+tool.Activated:connect(function()
+local currentTime = tick()
+            if currentTime - lastPressTime >= 1 then
+                lastPressTime = currentTime
+                game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Vanish"):FireServer()
+             wait(0.5)
+local pos = mouse.Hit+Vector3.new(0,2.5,0)
+pos = CFrame.new(pos.X,pos.Y,pos.Z)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+  end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
+tool.Name = "Invisible"
+tool.RequiresHandle = false
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+tool.Equipped:Connect(function()
+local invis_on = false
+    if chat then return end
+	    invis_on = not invis_on
+    	if invis_on then
+            local savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            local ghj = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+            wait()
+            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-25.95, 84, 3537.55))
+            wait(0.15)
+            local Seat = Instance.new('Seat', game.Workspace)
+            Seat.Anchored = false
+            Seat.CanCollide = false
+            Seat.Name = 'invischair'
+            Seat.Transparency = 1
+            Seat.Position = Vector3.new(-25.95, 84, 3537.55)
+            local Weld = Instance.new("Weld", Seat)
+            Weld.Part0 = Seat
+            Weld.Part1 = game.Players.LocalPlayer.Character:FindFirstChild("Torso") or game.Players.LocalPlayer.Character.UpperTorso
+            wait()
+            Seat.CFrame = savedpos
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed * 5
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Trancparency = 0.5
+    end
+end)
+
+tool.Unequipped:Connect(function()
+workspace:FindFirstChild('invischair'):Remove()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+game.Players.LocalPlayer.Character.HumanoidRootPart.Trancparency = 0
+end)
+
+local tool = Instance.new("Tool")
+tool.Name = "I cant stop"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+tool.Activated:Connect(function()
+  local currentTime = tick()
+            if currentTime - lastPressTime >= 4.5 then
+                lastPressTime = currentTime 
+            for i = 1, 50 do
+            game:GetService("ReplicatedStorage").GojoSatoru.rush:FireServer()
+            end
+               wait(2.6)
+              game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 300
+            end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
 tool.Name = "Scratches"
 tool.RequiresHandle = false
 
