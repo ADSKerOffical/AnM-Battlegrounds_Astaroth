@@ -1203,6 +1203,7 @@ k:AdjustSpeed(1)
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "MyButtonGuiTest"
 ScreenGui.Enabled = true
+ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local Button = Instance.new("TextButton")
@@ -1218,7 +1219,7 @@ Button.Parent = ScreenGui
 local lastPressTime = 0
 Button.MouseButton1Click:Connect(function()
     local currentTime = tick()
-            if currentTime - lastPressTime >= 5 then
+            if currentTime - lastPressTime >= 1.5 then
                 lastPressTime = currentTime 
                 local closestDistance = math.huge
                     local closestHumanoid = nil
@@ -1238,7 +1239,7 @@ Button.MouseButton1Click:Connect(function()
                     if closestHumanoid then
                        local args = {
            [1] = closestHumanoid.RootPart.CFrame,
-           [2] = closestHumanoid.MaxHealth / 10
+           [2] = closestHumanoid.MaxHealth / 4
        }
 
  game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
@@ -1249,6 +1250,7 @@ end)
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "MyButtonGui"
 ScreenGui.Enabled = true
+ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local Button = Instance.new("TextButton")
@@ -1264,7 +1266,7 @@ Button.Parent = ScreenGui
 local lastPressTime = 0
 Button.MouseButton1Click:Connect(function()
     local currentTime = tick()
-            if currentTime - lastPressTime >= 5 then
+            if currentTime - lastPressTime >= 3 then
                 lastPressTime = currentTime 
                 for i = 1, 5 do
 game:GetService("ReplicatedStorage").sukuna.remotes.dismantle:FireServer()
