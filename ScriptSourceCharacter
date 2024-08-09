@@ -1037,6 +1037,94 @@ end)
 tool.Parent = game.Players.LocalPlayer.Backpack
 
 local tool = Instance.new("Tool")
+tool.Name = "White hole"
+tool.RequiresHandle = false
+
+local lastPressTime = 0
+local oney = 4
+tool.Activated:Connect(function()
+local currentTime = tick()
+            if currentTime - lastPressTime >= 8 then
+                lastPressTime = currentTime
+         local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://16419185188"
+local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(0.75)
+  wait(0.25)
+ Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "Energy Brust Spawn"
+Spooky.SoundId = "rbxassetid://7211875874"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+
+local player = game.Players.LocalPlayer
+    neonPart = Instance.new("Part")
+    neonPart.Name = "NeonPart"
+    neonPart.Size = Vector3.new(10, 10, 10)
+    neonPart.Shape = Enum.PartType.Ball
+    neonPart.Color = Color3.fromRGB(255, 255, 255)
+    neonPart.Transparency = 0
+    neonPart.Material = Enum.Material.Neon
+    neonPart.CanCollide = false
+    neonPart.Parent = workspace
+    neonPart.CFrame = player.Character.HumanoidRootPart.CFrame
+game.Debris:AddItem(neonPart, 15)
+
+Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "Energy Brust"
+Spooky.SoundId = "rbxassetid://1146691360"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+
+Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "Voidd"
+Spooky.SoundId = "rbxassetid://1836983664"
+Spooky.Volume = 0.8
+Spooky.PlaybackSpeed = 0.8 + (oney / (oney * 2))
+Spooky.Looped = false
+Spooky:Play()
+
+Spooky = Instance.new("Sound", neonPart)
+Spooky.Name = "ASMR"
+Spooky.SoundId = "rbxassetid://115327352"
+Spooky.Volume = 1
+Spooky.PlaybackSpeed = oney
+Spooky.Looped = false
+Spooky.Looped = true
+Spooky:Play()
+oney = oney + 1
+  if oney >= 20 then
+  oney = 4
+  end
+
+    partTween = game:GetService("TweenService"):Create(neonPart, TweenInfo.new(15, Enum.EasingStyle.Quad), {
+        Position = neonPart.Position + player.Character.HumanoidRootPart.CFrame.LookVector * 225
+    })
+    partTween:Play()
+ neonPart.Touched:Connect(function(hit)
+        if hit.Parent:FindFirstChildOfClass("Humanoid") then
+            local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+            if humanoid.Parent ~= player.Character and humanoid.Health ~= 0 then
+local  args = {
+        [1] = humanoid.RootPart.CFrame,
+        [2] = humanoid.MaxHealth
+    }
+    game.Players.LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+            end
+        end
+    end)
+
+  end
+end)
+
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+local tool = Instance.new("Tool")
 tool.Name = "Domain Expansion"
 tool.RequiresHandle = false
 
