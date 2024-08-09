@@ -1125,32 +1125,143 @@ end)
 tool.Parent = game.Players.LocalPlayer.Backpack
 
 local tool = Instance.new("Tool")
-tool.Name = "Domain Expansion"
+tool.Name = "Domain Expansion: Crown of Darkness"
 tool.RequiresHandle = false
 
 local lastPressTime = 0
 tool.Activated:Connect(function()
   local currentTime = tick()
-            if currentTime - lastPressTime >= 40 then
+            if currentTime - lastPressTime >= 45 then
                 lastPressTime = currentTime 
-                local Anim = Instance.new("Animation")
-Anim.AnimationId = "rbxassetid://18190670658"
+                local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+local center = Instance.new("Part")
+center.Name = "CenterHitbox"
+center.Size = Vector3.new(2, 2, 2)
+center.Transparency = 1
+center.Anchored = true
+center.CanCollide = false
+center.CanTouch = false
+center.Position = game.Players.LocalPlayer.Character.Torso.Position
+center.Parent = game.Workspace
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://18780511587"
 local k = game:GetService("Players").LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
 k:Play()
 k:AdjustSpeed(1)
-local StarterGui = game:GetService("StarterGui")
-StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MyButtonGuiTest"
+ScreenGui.Enabled = true
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local Button = Instance.new("TextButton")
+Button.Name = "Button"
+Button.Size = UDim2.new(0.07, 0.07, 0.07, 7)
+Button.Position = UDim2.new(0.86, 0, 0.4, 0)
+Button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.TextScaled = true
+Button.Text = "Soul Destroyer"
+Button.Parent = ScreenGui
+
+local lastPressTime = 0
+Button.MouseButton1Click:Connect(function()
+    local currentTime = tick()
+            if currentTime - lastPressTime >= 5 then
+                lastPressTime = currentTime 
+                local closestDistance = math.huge
+                    local closestHumanoid = nil
+                    local Usuario = game.Players.LocalPlayer
+
+                    for _, v in pairs(workspace:GetDescendants()) do
+                        if v:IsA("Humanoid") and v.RootPart and v.RootPart.Parent ~= Usuario.Character then
+                            local distance =
+                                (v.RootPart.Position - game.Workspace.CenterHitbox.Position).magnitude
+                            if distance < closestDistance and distance <= 110 then
+                                closestDistance = distance
+                                closestHumanoid = v
+                            end
+                        end
+                    end
+
+                    if closestHumanoid then
+                       local args = {
+           [1] = closestHumanoid.RootPart.CFrame,
+           [2] = closestHumanoid.MaxHealth / 10
+       }
+
+ game:GetService("Players").LocalPlayer.Backpack["Mini Uzumaki"].FireServer.RemoteEvent:FireServer(unpack(args))
+                    end
+            end
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MyButtonGui"
+ScreenGui.Enabled = true
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local Button = Instance.new("TextButton")
+Button.Name = "Button"
+Button.Size = UDim2.new(0.04, 0.04, 0.04, 7)
+Button.Position = UDim2.new(0.945, 0, 0.4, 0)
+Button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.TextScaled = true
+Button.Text = "Over cut"
+Button.Parent = ScreenGui
+
+local lastPressTime = 0
+Button.MouseButton1Click:Connect(function()
+    local currentTime = tick()
+            if currentTime - lastPressTime >= 5 then
+                lastPressTime = currentTime 
+                for i = 1, 5 do
+game:GetService("ReplicatedStorage").sukuna.remotes.dismantle:FireServer()
+game:GetService("ReplicatedStorage").Remotes.colovo:FireServer()
+end
+            end
+end)
 Spooky = Instance.new("Sound", game.Workspace)
 Spooky.Name = "Astaroth Domain Expansion"
 Spooky.SoundId = "rbxassetid://17558107142"
 Spooky.Volume = 3.5
 Spooky.PlaybackSpeed = 1
 Spooky.Looped = false
-Spooky.TimePosition = 1.5
+Spooky.TimePosition = 1.4
 Spooky:Play()
-  wait(3)
- local function spawnUzumakiCircle(hit)
+ wait(0.6)
+local billboardGui = Instance.new("BillboardGui")
+    billboardGui.Name = "ChatBillboardGui"
+    billboardGui.Adornee = game.Players.LocalPlayer.Character.Head
+    billboardGui.Size = UDim2.new(0, 200, 0, 50)
+    billboardGui.StudsOffset = Vector3.new(0, 2, 0)
+    billboardGui.AlwaysOnTop = true
+    billboardGui.LightInfluence = 1
+    billboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    local msg = Instance.new("TextLabel")
+    msg.Name = "ChatMessageLabel"
+    msg.Text = "Domain Expansion"
+    msg.Size = UDim2.new(1, 0, 1, 0)
+    msg.BackgroundTransparency = 1
+    msg.TextColor3 = Color3.new(0, 0, 0)
+    msg.TextScaled = true
+    msg.TextStrokeColor3 = Color3.new(0, 0, 0)
+    msg.TextStrokeTransparency = 0
+    msg.Visible = true
+    msg.Parent = billboardGui
+
+    billboardGui.Parent = game.Players.LocalPlayer.Character.Head
+    task.wait(0.025)
+   wait(0.1)
+   for i = 1, 10 do
+     task.wait(0.075)
+    msg.TextTransparency = i / 10
+    end
+k:AdjustSpeed(0)
+    wait(1.5)
+local function spawnUzumakiCircle(hit)
   centerPosition = hit.Parent.Humanoid.RootPart.CFrame
   local radius = 30
   local numUzumaki = 8
@@ -1173,21 +1284,23 @@ end
 local function createBlock(position)
   local block = Instance.new("Part")
   block.Parent = workspace
+  block.Name = "FireAstarothHitbox"
   block.Size = Vector3.new(13, 13, 13)
   block.Position = position
-  block.Transparency = 0.95
+  block.Transparency = 1
+  block.CanCollide = false
   block.BrickColor = BrickColor.new("Black")
   block.Color = Color3.new(0, 0, 0)
   block.Material = Enum.Material.Neon
   block.Anchored = true
 
-  game.Debris:AddItem(block, 30)
+  game.Debris:AddItem(block, 40)
 
   local fire = Instance.new("Fire")
-  fire.Heat = 10
+  fire.Heat = 120
   fire.Color = block.Color
   fire.SecondaryColor = block.Color
-  fire.Size = 100
+  fire.Size = 50
   fire.Parent = block
 
   block.Touched:Connect(function(hit)
@@ -1199,20 +1312,65 @@ local function createBlock(position)
   end)
 end
 
-local radius = 100
+local radius = 135
 
-for i = 1, 32 do
-  local angle = math.rad(i * (360 / 32))
+for i = 1, 42 do
+  local angle = math.rad(i * (360 / 42))
   local x = radius * math.cos(angle)
   local z = radius * math.sin(angle)
   local position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(x, 0, z)
   createBlock(position)
 end
-  wait(5)
+ wait(6.3)
 k:Stop()
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 local StarterGui = game:GetService("StarterGui")
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+  wait(29)
+ Spooky = Instance.new("Sound", game.Workspace)
+Spooky.Name = "Astaroth Domain Break"
+Spooky.SoundId = "rbxassetid://18759859183"
+Spooky.Volume = 2.5
+Spooky.PlaybackSpeed = 1
+Spooky.Looped = false
+Spooky:Play()
+ wait(4)
+ local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local radius = 135
+local createdParts = {}
+
+for i = 1, 32 do
+  local angle = math.rad(i * (360 / 32))
+  local x = radius * math.cos(angle)
+  local z = radius * math.sin(angle)
+  local position = game.Workspace.CenterHitbox.Position + Vector3.new(x, 0, z)
+
+  local part = Instance.new("Part")
+  part.Size = Vector3.new(1, 1, 1)
+  part.Anchored = true
+  part.Transparency = 1
+  part.Parent = workspace
+  part.Position = position
+
+  local smoke = Instance.new("Smoke")
+  smoke.Color = Color3.new(0, 0, 0)
+  smoke.Opacity = 0.5
+  smoke.RiseVelocity = 40
+  smoke.Size = 10
+  smoke.Parent = part
+  table.insert(createdParts, smoke)
+end
+
+wait(1)
+
+game.Workspace.CenterHitbox:Destroy()
+game.Players.LocalPlayer.PlayerGui.MyButtonGuiTest:Destroy()
+game.Players.LocalPlayer.PlayerGui.MyButtonGui:Destroy()
+for i, smoke in ipairs(createdParts) do
+  smoke.Enabled = false
+end
             end
 end)
 
